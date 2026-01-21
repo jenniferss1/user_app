@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go_app/src/configuration/logger"
 	"go_app/src/controller/routes"
 	"log"
 
@@ -9,6 +10,7 @@ import (
 )
 
 func main() {
+	logger.Info("About to start user application.")
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
