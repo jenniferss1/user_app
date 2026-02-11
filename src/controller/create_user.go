@@ -5,7 +5,6 @@ import (
 	"go_app/src/configuration/validation"
 	"go_app/src/controller/model/request"
 	"go_app/src/model"
-	"go_app/src/model/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -15,7 +14,7 @@ var (
 	UserDomainInterface model.UserDomainInterface
 )
 
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller")
 	var userRequest request.UserRequest
 
@@ -34,8 +33,7 @@ func CreateUser(c *gin.Context) {
 		userRequest.Weight,
 		userRequest.Height,
 	)
-	service := service.NewUserDomainService()
-	if err := service.CreateUser(domain); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 	}
 

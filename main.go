@@ -2,7 +2,9 @@ package main
 
 import (
 	"go_app/src/configuration/logger"
+	"go_app/src/controller"
 	"go_app/src/controller/routes"
+	"go_app/src/model/service"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -11,9 +13,13 @@ import (
 func main() {
 	logger.Info("About to start user application.")
 
+	// Innit dependencies
+	service := service.NewUserDomainService()
+	userController := controller.NewUserControllerInterface(service)
+
 	router := gin.Default()
 
-	routes.InitRoutes(&router.RouterGroup)
+	routes.InitRoutes(&router.RouterGroup, userController)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
