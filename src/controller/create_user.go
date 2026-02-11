@@ -5,6 +5,7 @@ import (
 	"go_app/src/configuration/validation"
 	"go_app/src/controller/model/request"
 	"go_app/src/model"
+	"go_app/src/model/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,7 +34,8 @@ func CreateUser(c *gin.Context) {
 		userRequest.Weight,
 		userRequest.Height,
 	)
-	if err := domain.CreateUser(); err != nil {
+	service := service.NewUserDomainService()
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 	}
 
