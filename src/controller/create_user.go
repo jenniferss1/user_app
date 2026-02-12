@@ -5,6 +5,7 @@ import (
 	"go_app/src/configuration/validation"
 	"go_app/src/controller/model/request"
 	"go_app/src/model"
+	"go_app/src/view"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -37,5 +38,5 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		c.JSON(err.Code, err)
 	}
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
 }

@@ -20,5 +20,7 @@ type userControllerInterface struct {
 }
 
 func NewUserControllerInterface(serviceInterface service.UserDomainService) UserControllerInterface {
-	return &userControllerInterface{}
+	return &userControllerInterface{
+		service: serviceInterface,
+	}
 }
