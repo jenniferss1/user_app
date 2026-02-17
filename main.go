@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go_app/src/configuration/database/mongodb"
 	"go_app/src/configuration/logger"
 	"go_app/src/controller"
 	"go_app/src/controller/routes"
@@ -12,6 +13,8 @@ import (
 
 func main() {
 	logger.Info("About to start user application.")
+
+	mongodb.InitConnection()
 
 	// Innit dependencies
 	service := service.NewUserDomainService()
