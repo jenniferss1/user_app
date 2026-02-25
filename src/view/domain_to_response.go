@@ -7,11 +7,9 @@ import (
 
 func ConvertDomainToResponse(userDomain model.UserDomainInterface) response.UserReponse {
 	return response.UserReponse{
-		Id:     "",
-		Email:  userDomain.GetEmail(),
-		Name:   userDomain.GetName(),
-		Age:    userDomain.GetAge(),
-		Weight: userDomain.GetWeight(),
-		Height: userDomain.GetHeight(),
+		Id:    "",
+		Email: userDomain.GetEmail(),
+		Name:  userDomain.GetName(),
+		Age:   userDomain.GetAge(),
 	}
 }

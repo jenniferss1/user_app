@@ -31,8 +31,6 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		userRequest.Password,
 		userRequest.Name,
 		userRequest.Age,
-		userRequest.Weight,
-		userRequest.Height,
 	)
 	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
