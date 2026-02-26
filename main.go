@@ -1,10 +1,10 @@
 package main
 
 import (
+	"context"
+	"go_app/src/configuration/database/mongodb"
 	"go_app/src/configuration/logger"
-	"go_app/src/controller"
 	"go_app/src/controller/routes"
-	"go_app/src/model/service"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -13,9 +13,15 @@ import (
 func main() {
 	logger.Info("About to start user application.")
 
-	// Innit dependencies
-	service := service.NewUserDomainService()
-	userController := controller.NewUserControllerInterface(service)
+	database, err := mongodb.NewMongoDBConnection(context.Background())
+	if err != nil {
+		log.Fatalf(
+			"Error trying to connect to database, error=%s \n",
+			err.Error())
+		return
+	}
+
+	userController := initDependencies(database)
 
 	router := gin.Default()
 
